@@ -1,6 +1,6 @@
 ![logo](https://edteam-media.s3.amazonaws.com/blogs/big/2ab53939-9b50-47dd-b56e-38d4ba3cc0f0.png)
 
-#  Verificador de Controladores y Herramientas - Kali Linux
+# Verificador de Controladores y Herramientas - Kali Linux
 
 ## :information_source: Descripción
 
@@ -8,7 +8,7 @@ Este script de Bash fue desarrollado para facilitar la verificación e instalació
 Proporciona una forma rápida y sencilla de asegurarse de que los controladores y herramientas esenciales estén instalados y actualizados en tu sistema para auditorias wifi.
 
 
-## :arrow_down: Instalacion
+## :computer: Instalación
 ```bash
 cd /opt
 sudo rm -rf Kali-linux_drivers_and_tools_checker
@@ -18,7 +18,7 @@ cd Kali-linux_drivers_and_tools_checker
 ls -lthas
 ```
 
-## :book: Acceso directo
+## :key: Acceso Directo
 ```bash
 cd 
 sudo echo "cd /opt/Kali-linux_drivers_and_tools_checker && sudo ./kalilinuxdrivertools.sh" > kalilinuxdrivertools
@@ -28,7 +28,7 @@ sudo mv kalilinuxdrivertools /usr/local/bin/
 cd
 ```
 
-## :hammer: Modo de Uso
+## :rocket: Modo de Uso
 
 Ejecutar el scrip:
 
@@ -36,7 +36,7 @@ Ejecutar el scrip:
 sudo kalilinuxdrivertools
 ```
 ![logo](https://github.com/JennValentine/Kali-linux_drivers_and_tools_checker/blob/main/Imagenes/kalilinuxdrivertools.jpg)
-:books: DATA:
+:memo: Notas:  
 
 * Verificación y actualización de repositorios.
 * Verificación y actualización de paquetes instalados.
@@ -50,5 +50,5 @@ Asegúrate de revisar el código fuente del script para comprender completamente q
 
 :bookmark_tabs: Disfruta utilizando el script y mantén tu sistema Kali Linux actualizado y listo para su uso en pruebas de seguridad! 
 
-## :octocat: Créditos
-1. [Jenn Valentine](https://t.me/JennValentine) - Update Contributor
+## :email: Contacto
+* :busts_in_silhouette: [Jenn Valentine](https://t.me/JennValentine) - Update Contributor :octocat:
