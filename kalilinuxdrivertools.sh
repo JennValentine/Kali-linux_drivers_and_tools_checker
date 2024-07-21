@@ -36,11 +36,12 @@ bg_magenta="\033[0;45m"   # Fondo Magenta
 bg_cyan="\033[0;46m"      # Fondo Cian
 bg_white="\033[0;47m"     # Fondo Blanco
 
-# Iconos
-checkmark="${green}[++]${reset}"
-error="${red}[--]${reset}"
-info="${yellow}[**]${reset}"
-process="${magenta}[>>]${reset}"
+# Iconos v3
+checkmark="${white}[${green}++${white}]${green}"
+error="${white}[${red}--${white}]${reset}"
+info="${white}[${yellow}**${white}]${white}"
+unknown="${white}[${blue}!!${white}]${reset}"
+process="${white}[${magenta}>>${white}]${magenta}"
 indicator="${red}==>${reset}"
 
 # Barra de separación
@@ -63,6 +64,7 @@ check_and_install_tool() {
         echo -e "\n${error} ${white}$tool ${yellow}no está instalado. Instalando automáticamente...${reset}\n"
         #--- sudo apt-get update
         sudo apt-get install -y $tool
+
         # Verificar si la instalación fue exitosa
         if command -v $tool &> /dev/null; then
             echo -e "\n${checkmark} ${white}$tool ${yellow}se ha instalado correctamente.${reset}"
@@ -79,6 +81,7 @@ fun_repositorios () {
     read -p "$(echo -e "${green} Desea actualizar repositorios ahora? [N/y]:${white}") " response
     if [[ "$response" = @(y|Y) ]]; then
         # Proceso de instalación
+
         echo -e "${reset}"
         sudo apt-get -y update
     else
@@ -92,6 +95,7 @@ fun_paquetes () {
     echo -e "${green} Por defecto ${white}N ${green}= ${white}No Actualizar${reset}"
     read -p "$(echo -e "${green} Desea actualizar paquetes instalados ahora? [N/y]:${white}") " response
     if [[ "$response" = @(y|Y) ]]; then
+
         # Proceso de instalación
         echo -e "${reset}"
         sudo apt-get -y upgrade
@@ -100,37 +104,29 @@ fun_paquetes () {
     fi
 }
 
-fun_distribucion () {
-    # Actualizar distribución
-    echo -e "\n${info} Actualizar distribución (dist-update)......${reset}\n"
-    echo -e "${green} Por defecto ${white}N ${green}= ${white}No Actualizar${reset}"
-    read -p "$(echo -e "${green} Desea actualizar distribución ahora? [N/y]:${white}") " response
-    if [[ "$response" = @(y|Y) ]]; then
-        # Proceso de instalación
-        echo -e "${reset}"
-        sudo apt-get -y dist-update
-    else
-        sleep 1s
-    fi
-}
-
 fun_driver () {    
     # Instalar realtek-rtl8188eus-dkms
-    echo -e "\n${info} Instalar realtek-rtl8188eus-dkms......${reset}"
-    # Instalar build-essential, git, dkms y headers
-    echo -e "\n${process} Paquetes esenciales build-essential git dkms linux-headers......${reset}\n"
-    sudo apt-get install -y build-essential git dkms linux-headers-$(uname -r)
+    echo -e "\n${info} Instalar realtek-rtl8188eus-dkms......${reset}\n"
+
+    # Lista de herramientas esenciales a comprobar
+    essential_tools=("git")
+
+    # Comprobar herramientas esenciales
+    echo -e "\n${info} Herramientas esenciales: ${magenta}comprobando...${reset}\n"
+    for tool in "${essential_tools[@]}"
+    do
+        check_and_install_tool $tool
+    done
+
+    sudo apt-get install -y build-essential dkms linux-headers-$(uname -r)
     sudo apt install -y realtek-rtl8188eus-dkms
-    #--- sudo apt install -y realtek-rtl8192eu-dkms
     #--- sudo apt install -y realtek-rtl8814au-dkms
-    #--- sudo apt install -y realtek-rtl88XXa-dkms
-    #--- sudo apt install -y realtek-rtl88x2bu-dkms
+    #--- sudo apt install -y realtek-rtl8192eu-dkms | off
+    #--- sudo apt install -y realtek-rtl88XXa-dkms | off
+    #--- sudo apt install -y realtek-rtl88x2bu-dkms | off
+
     # Instalar realtek-rtl8188fu-dkms
     echo -e "\n${info} Instalar realtek-rtl8188fu-dkms......${reset}"
-    cd
-    # Instalar git
-    echo -e "\n${process} Paquetes esenciales git......${reset}\n"
-    sudo apt-get install -y git
     cd /opt
     sudo rm -rf rtl8188fu
     sudo git clone https://github.com/kelebek333/rtl8188fu
@@ -143,13 +139,15 @@ fun_driver () {
 }
 
 fun_audio () {
+    
     # Estos son pasos generales y pueden variar según la configuración 
     # específica de tu hardware. Se ejecutará una serie de pasos para intentar configurar y activar 
     # los controladores de audio de tu tarjeta de sonido. Ten en cuenta que algunos pasos pueden no 
     # ser necesarios o aplicables a tu configuración específica. Si encuentras 
     # problemas, asegúrate de investigar y consultar los foros de la comunidad de Kali Linux 
     # para obtener asistencia según tus necesidades y hardware específicos.
-    echo -e "\n${info} Instalar driver de audio......${reset}\n"
+    
+    echo -e "\n${info} Instalando driver de audio......${reset}\n"
     lspci | grep -i audio
     lsmod | grep snd
     sudo modprobe snd_hda_intel
@@ -164,18 +162,23 @@ fun_audio () {
 
 fun_install_tools () {
     # Instalar wifite
-    echo -e "\n${info} Instalar wifite.....${reset}\n"
+    echo -e "\n${info} Instalando wifite.....${reset}\n"
     sudo apt install -y wifite
-    # Instalar hcxdumptool hcxtools
-    echo -e "\n${process} Paquetes esenciales Instalar hcxdumptool hcxtools......${reset}\n"
-    sudo apt install -y hcxdumptool hcxtools
-    # Instalar dependencias para compilar Pyrit 
-    echo -e "\n${process} Paquetes esenciales libpcap-dev git python2.7-dev libssl-dev zlib1g-dev libpcap-dev......${reset}\n"
-    sudo apt-get install -y libpcap-dev git python2.7-dev libssl-dev zlib1g-dev libpcap-dev
+
+    # Lista de herramientas esenciales a comprobar
+    essential_tools=("git")
+
+    sudo apt install -y hcxdumptool hcxtools libpcap-dev python2.7-dev libssl-dev zlib1g-dev libpcap-dev
+
+    # Comprobar herramientas esenciales
+    echo -e "\n${info} Herramientas esenciales: ${magenta}comprobando...${reset}\n"
+    for tool in "${essential_tools[@]}"
+    do
+        check_and_install_tool $tool
+    done
+
     # Instalar git pyrit
-    echo -e "\n${process} Paquetes esenciales git pyrit......${reset}\n"
-    cd
-    sudo apt-get install -y git
+    echo -e "\n${process} Instalando pyrit......${reset}\n"
     cd /opt
     sudo rm -rf Pyrit
     sudo git clone https://github.com/JPaulMora/Pyrit.git
@@ -211,11 +214,18 @@ fun_install_tools () {
     done
 
     # Instalar fluxion
-    echo -e "\n${info} Instalar fluxion.....${reset}"
-    cd
-    # Instalar git
-    echo -e "\n${process} Paquetes esenciales git......${reset}\n"
-    sudo apt-get install -y git
+    echo -e "\n${info} Instalando fluxion.....${reset}"
+
+    # Lista de herramientas esenciales a comprobar
+    essential_tools=("git")
+
+    # Comprobar herramientas esenciales
+    echo -e "\n${info} Herramientas esenciales: ${magenta}comprobando...${reset}\n"
+    for tool in "${essential_tools[@]}"
+    do
+        check_and_install_tool $tool
+    done
+
     cd /opt
     sudo rm -rf fluxion
     sudo git clone https://www.github.com/FluxionNetwork/fluxion.git
@@ -245,10 +255,17 @@ fun_install_tools () {
     # Instalar feedingbottle
     echo -e "\n${info} Instalar feedingbottle......${reset}"
     cd
-    # Instalar git fluid
-    echo -e "\n${process} Paquetes esenciales git fluid......${reset}\n"
-    sudo apt-get install -y git
-    sudo apt-get install -y fluid
+
+    # Lista de herramientas esenciales a comprobar
+    essential_tools=("git" "fluid")
+
+    # Comprobar herramientas esenciales
+    echo -e "\n${info} Herramientas esenciales: ${magenta}comprobando...${reset}\n"
+    for tool in "${essential_tools[@]}"
+    do
+        check_and_install_tool $tool
+    done
+
     cd /opt
     sudo rm -rf feedingbottle
     sudo git clone https://github.com/ChunshengZhao/feedingbottle.git
@@ -258,7 +275,7 @@ fun_install_tools () {
     sudo fluid -c feedingbottle.fl
     sudo fltk-config --compile feedingbottle.cxx
     sudo chmod +x feedingbottle
-    sudo wget https://github.com/JennValentine/Kali-linux_drivers_and_tools_checker/raw/main/feedingbottle/feedingbottle
+    sudo wget https://github.com/JennValentine/Kali-linux_drivers_and_tools_checker/raw/main/Herramientas/feedingbottle/feedingbottle
     #--- sudo ./feedingbottle
     cd
     echo "cd /opt/feedingbottle && sudo ./feedingbottle" > feedingbottle 
@@ -267,17 +284,27 @@ fun_install_tools () {
     cd
     
     # Instalar lazyaircrack
-    echo -e "\n${info} Instalar lazyaircrack.....${reset}"
-    cd
-    # Instalar git
-    echo -e "\n${process} Paquetes esenciales git......${reset}\n"
-    sudo apt-get install -y git
+    echo -e "\n${info} Instalando  lazyaircrack.....${reset}"
+
+    # Lista de herramientas esenciales a comprobar
+    essential_tools=("git")
+
+    # Comprobar herramientas esenciales
+    echo -e "\n${info} Herramientas esenciales: ${magenta}comprobando...${reset}\n"
+    for tool in "${essential_tools[@]}"
+    do
+        check_and_install_tool $tool
+    done
+
     cd /opt
     sudo rm -rf lazyaircrack
     sudo git clone https://github.com/3xploitGuy/lazyaircrack.git
     sudo chmod +x lazyaircrack/*
     cd lazyaircrack
     sudo chmod +x lazyaircrack.sh
+
+    # Dictionario
+    echo -e "\n${info} Creando diccionario.....${reset}\n"
     cd dictionary
     sudo rm -rf defaultWordList.txt
     sudo cat /usr/share/set/src/fasttrack/wordlist.txt /usr/share/john/password.lst /usr/share/nmap/nselib/data/passwords.lst /usr/share/wordlists/rockyou.txt /usr/share/sqlmap/data/txt/wordlist.txt /usr/share/dict/wordlist-probable.txt > diccionario_combinado.txt
@@ -294,11 +321,18 @@ fun_install_tools () {
     cd
 
     # Instalar Wifi-Hack
-    echo -e "\n${info} Instalar Wifi-Hack......${reset}"
-    cd
-    # Instalar git
-    echo -e "\n${process} Paquetes esenciales git......${reset}\n"
-    sudo apt-get install -y git
+    echo -e "\n${info} Instalando Wifi-Hack......${reset}"
+
+    # Lista de herramientas esenciales a comprobar
+    essential_tools=("git")
+
+    # Comprobar herramientas esenciales
+    echo -e "\n${info} Herramientas esenciales: ${magenta}comprobando...${reset}\n"
+    for tool in "${essential_tools[@]}"
+    do
+        check_and_install_tool $tool
+    done
+
     cd /opt
     sudo rm -rf Wifi-Hack
     sudo git clone https://github.com/R3LI4NT/Wifi-Hack.git
@@ -322,15 +356,22 @@ fun_install_tools () {
     done
 
     # Lista de herramientas extras a comprobar
-    # extras_tools=("wifite" "kismet" "fern-wifi-cracker" "wireshark" "eaphammer" "wifi-honey" "routersploit")
+    extras_tools=("wifite" "kismet" "fern-wifi-cracker" "wireshark" "eaphammer" "wifi-honey" "routersploit")
+
+    # Comprobar herramientas extras
+    echo -e "\n${info} Herramientas extras: ${magenta}comprobando...${reset}\n"
+    for tool in "${extras_tools[@]}"
+    do
+        check_and_install_tool $tool
+    done
 }
 
 fun_data_system () {
-    # Mostrar la configuración de red usando ifconfig
+    # Mostrar la configuraciÃ³n de red usando ifconfig
     echo -e "\n${info} ifconfig......${reset}\n"
     ifconfig
 
-    # Mostrar información sobre interfaces inalámbricas utilizando iwconfig
+    # Mostrar informaciÃ³n sobre interfaces inalÃ¡mbricas utilizando iwconfig
     echo -e "\n${info} iwconfig......${reset}\n"
     iwconfig
 
@@ -338,9 +379,9 @@ fun_data_system () {
     echo -e "\n${info} lsusb......${reset}\n"
     lsusb
 
-    # Mostrar información detallada sobre las capacidades inalámbricas del sistema usando iw list
+    # Mostrar informaciÃ³n detallada sobre las capacidades inalÃ¡mbricas del sistema usando iw list
     echo -e "\n${info} iw list......${reset}\n"
-    iw list
+    iw list | grep -A 10 "Supported interface modes:" | grep "*"
 }
 
 fun_banner () {
