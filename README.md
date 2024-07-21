@@ -1,12 +1,13 @@
 ![logo](https://edteam-media.s3.amazonaws.com/blogs/big/2ab53939-9b50-47dd-b56e-38d4ba3cc0f0.png)
 
-# Verificador de Controladores y Herramientas - Kali Linux
+# Kali Linux - Drivers and Tools Checker
 
 ## :information_source: Descripción
-
-Este script de Bash fue desarrollado para facilitar la verificación e instalación de controladores y herramientas comunes en Kali Linux. 
-Proporciona una forma rápida y sencilla de asegurarse de que los controladores y herramientas esenciales estén instalados y actualizados en tu sistema para auditorias wifi.
-
+El script Kali Linux - Drivers and Tools Checker está diseñado para automatizar la 
+instalación y verificación de diversos controladores y herramientas esenciales para 
+la auditoría de seguridad en Kali Linux. El objetivo principal es asegurar que todos 
+los componentes necesarios estén instalados y configurados correctamente para 
+realizar auditorías de red y pruebas de penetración.
 
 ## :computer: Instalación
 ```bash
@@ -28,6 +29,11 @@ sudo mv kalilinuxdrivertools /usr/local/bin/
 cd
 ```
 
+## :computer: Instalación en una Línea
+```bash
+wget https://raw.githubusercontent.com/JennValentine/Kali-linux_drivers_and_tools_checker/main/install.sh ; sudo chmod +x install.sh; sudo ./install.sh; sudo rm -rf install.sh
+```
+
 ## :rocket: Modo de Uso
 
 Ejecutar el scrip:
@@ -36,19 +42,45 @@ Ejecutar el scrip:
 sudo kalilinuxdrivertools
 ```
 ![logo](https://github.com/JennValentine/Kali-linux_drivers_and_tools_checker/blob/main/Imagenes/kalilinuxdrivertools.jpg)
-:memo: Notas:  
+:memo: Notas: Características y Funcionalidades Principales
 
-* Verificación y actualización de repositorios.
-* Verificación y actualización de paquetes instalados.
-* Verificación y actualización de la distribución.
-* Instalación de controladores de red Wi-Fi (por ejemplo, rtl8188fu, rtl8188eus).
-* Configuración y activación de controladores de audio.
-* Instalación de herramientas esenciales para auditorías de seguridad de redes (por ejemplo, wifite, airgeddon, fluxion, sparrow-wifi).
-* Verificación de la configuración del sistema y los dispositivos de red.
+1 - Comprobación de Permisos de Root:
 
-Asegúrate de revisar el código fuente del script para comprender completamente qué hace y cómo funciona.
+* El script verifica si se está ejecutando con permisos de superusuario (root) y, en caso contrario, solicita que se ejecute con sudo.
 
-:bookmark_tabs: Disfruta utilizando el script y mantén tu sistema Kali Linux actualizado y listo para su uso en pruebas de seguridad! 
+2 - Actualización de Repositorios y Paquetes:
+
+* Opción para actualizar los repositorios (apt-get update).
+* Opción para actualizar los paquetes instalados (apt-get upgrade).
+
+3 - Instalación de Controladores de Red:
+
+* Instalación de controladores específicos para adaptadores de red Realtek, como rtl8188eus, rtl8188fu, y opcionalmente rtl8814au-dkms.
+
+4 - Configuración de Controladores de Audio:
+
+* Intenta configurar y activar los controladores de audio, asegurando la correcta funcionalidad del sonido en el sistema.
+
+5 - Instalación y Verificación de Herramientas Esenciales y Opcionales:
+
+* Verificación e instalación de herramientas esenciales como git, aircrack-ng, wifite, hcxdumptool, pyrit, airgeddon, fluxion, entre otras.
+* Instalación de herramientas adicionales como sparrow-wifi, feedingbottle, lazyaircrack, y Wifi-Hack.
+
+6 - Configuración y Creación de Diccionarios de Contraseñas:
+
+* Creación de un diccionario combinado a partir de múltiples fuentes de listas de contraseñas para usar en ataques de fuerza bruta.
+
+7 - Mostrar Información del Sistema:
+
+* Muestra la configuración de red, interfaces inalámbricas, dispositivos USB y capacidades inalámbricas del sistema.
+
+
+Este script es una herramienta poderosa para cualquier profesional de la seguridad 
+informática que utilice Kali Linux, ya que simplifica y automatiza muchas de las 
+tareas comunes de configuración y actualización necesarias para una auditoría de 
+seguridad eficaz.
+
+:bookmark_tabs: Disfruta utilizando el script y mantén tu sistema Kali Linux actualizado y listo para su uso en pruebas de seguridad en redes! 
 
 ## :email: Contacto
 * :busts_in_silhouette: [Jenn Valentine](https://t.me/JennValentine) - Update Contributor :octocat:
