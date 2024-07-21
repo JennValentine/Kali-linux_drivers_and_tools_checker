@@ -31,7 +31,7 @@ cd
 
 ## :computer: Instalación en una Línea
 ```bash
-wget https://raw.githubusercontent.com/JennValentine/Kali-linux_drivers_and_tools_checker/main/install.sh ; sudo chmod +x install.sh; sudo ./install.sh; sudo rm -rf install.sh
+wget https://raw.githubusercontent.com/JennValentine/Kali-linux_drivers_and_tools_checker/main/install.sh; sudo chmod +x install.sh; sudo ./install.sh; sudo rm -rf install.sh
 ```
 
 ## :rocket: Modo de Uso
