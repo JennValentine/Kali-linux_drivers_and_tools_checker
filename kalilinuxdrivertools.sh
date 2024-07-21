@@ -441,13 +441,13 @@ echo -e "${green}   Version   :  v0.0.01-dev"
 echo -e "${green}   Update    :  [2024/05/07]${reset}\n"
 
 # Mostrar información sobre drivers y herramientas
-echo -e "${info} ${blue}Driver rtl8188fu    ${info} ${blue}Forces Audio     ${info} ${blue}Tool Wifite${reset}"
-echo -e "${info} ${blue}Driver rtl8188eus                         ${info} ${blue}Tool Airgeddon${reset}"
-echo -e "${info} ${blue}Driver rtl8814au-dkms          ${info} ${blue}Tool Fluxion${reset}"
-echo -e "                                               ${info} ${blue}Tool Sparrow-wifi${reset}"
-echo -e "                                               ${info} ${blue}Tool Feedingbottle${reset}"
-echo -e "                                               ${info} ${blue}Tool lazyaircrack${reset}"
-echo -e "                                               ${info} ${blue}Tool Wifi-Hack${reset}\n"
+echo -e "${info} ${blue}Driver rtl8188fu          ${info} ${blue}Forces Audio     ${info} ${blue}Tool Wifite${reset}"
+echo -e "${info} ${blue}Driver rtl8188eus                               ${info} ${blue}Tool Airgeddon${reset}"
+echo -e "${info} ${blue}Driver rtl8814au-dkms                           ${info} ${blue}Tool Fluxion${reset}"
+echo -e "                                                     ${info} ${blue}Tool Sparrow-wifi${reset}"
+echo -e "                                                     ${info} ${blue}Tool Feedingbottle${reset}"
+echo -e "                                                     ${info} ${blue}Tool lazyaircrack${reset}"
+echo -e "                                                     ${info} ${blue}Tool Wifi-Hack${reset}\n"
 
 # Solicitar confirmación para la instalación
 echo -e "${green} Por defecto ${white}N ${green}= ${white}No instalar${reset}"
