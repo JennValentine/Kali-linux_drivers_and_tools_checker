@@ -315,11 +315,16 @@ fun_install_tools () {
     cd dictionary
     sudo rm -rf defaultWordList.txt
     sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
+    # combinando diccionario
     sudo cat /usr/share/set/src/fasttrack/wordlist.txt /usr/share/john/password.lst /usr/share/nmap/nselib/data/passwords.lst /usr/share/wordlists/rockyou.txt /usr/share/sqlmap/data/txt/wordlist.txt /usr/share/dict/wordlist-probable.txt > diccionario_combinado.txt
+    # Total de palabras
     wc -l diccionario_combinado.txt
     wc -l < diccionario_combinado.txt | cut -d' ' -f1
+    # diccionario sin duplicados
     sort diccionario_combinado.txt | uniq > diccionario_sin_duplicados.txt
+    # Total de palabras
     wc -l diccionario_sin_duplicados.txt
+    # palabras de 8 o mas
     grep -E '\b\w{8,}\b' diccionario_sin_duplicados.txt > palabras_8_o_mas.txt
     sudo mv palabras_8_o_mas.txt defaultWordList.txt
     cd
