@@ -106,7 +106,7 @@ fun_paquetes () {
 
 fun_driver () {    
     # Instalar realtek-rtl8188eus-dkms
-    echo -e "\n${info} Instalar realtek-rtl8188eus-dkms......${reset}\n"
+    echo -e "\n${info} Instalando realtek-rtl8188eus-dkms......${reset}"
 
     # Lista de herramientas esenciales a comprobar
     essential_tools=("git")
@@ -118,6 +118,8 @@ fun_driver () {
         check_and_install_tool $tool
     done
 
+    echo -e "\n${process} Instalando.....${reset}\n"
+
     sudo apt-get install -y build-essential dkms linux-headers-$(uname -r)
     sudo apt install -y realtek-rtl8188eus-dkms
     #--- sudo apt install -y realtek-rtl8814au-dkms
@@ -126,7 +128,7 @@ fun_driver () {
     #--- sudo apt install -y realtek-rtl88x2bu-dkms | off
 
     # Instalar realtek-rtl8188fu-dkms
-    echo -e "\n${info} Instalar realtek-rtl8188fu-dkms......${reset}"
+    echo -e "\n${info} Instalar realtek-rtl8188fu-dkms......${reset}\n"
     cd /opt
     sudo rm -rf rtl8188fu
     sudo git clone https://github.com/kelebek333/rtl8188fu
@@ -190,7 +192,7 @@ fun_install_tools () {
     cd
 
     # Instalar airgeddon
-    echo -e "\n${info} Instalar airgeddon.....${reset}\n"
+    echo -e "\n${info} Instalando airgeddon.....${reset}\n"
     sudo apt install -y airgeddon
 
     # Lista de herramientas esenciales a comprobar
@@ -226,6 +228,8 @@ fun_install_tools () {
         check_and_install_tool $tool
     done
 
+    echo -e "\n${process} Instalando.....${reset}\n"
+
     cd /opt
     sudo rm -rf fluxion
     sudo git clone https://www.github.com/FluxionNetwork/fluxion.git
@@ -254,7 +258,6 @@ fun_install_tools () {
 
     # Instalar feedingbottle
     echo -e "\n${info} Instalar feedingbottle......${reset}"
-    cd
 
     # Lista de herramientas esenciales a comprobar
     essential_tools=("git" "fluid")
@@ -265,6 +268,8 @@ fun_install_tools () {
     do
         check_and_install_tool $tool
     done
+
+    echo -e "\n${process} Instalando.....${reset}\n"
 
     cd /opt
     sudo rm -rf feedingbottle
@@ -284,7 +289,7 @@ fun_install_tools () {
     cd
     
     # Instalar lazyaircrack
-    echo -e "\n${info} Instalando  lazyaircrack.....${reset}"
+    echo -e "\n${info} Instalando lazyaircrack.....${reset}"
 
     # Lista de herramientas esenciales a comprobar
     essential_tools=("git")
@@ -295,6 +300,8 @@ fun_install_tools () {
     do
         check_and_install_tool $tool
     done
+
+    echo -e "\n${process} Instalando.....${reset}\n"
 
     cd /opt
     sudo rm -rf lazyaircrack
@@ -307,6 +314,7 @@ fun_install_tools () {
     echo -e "\n${info} Creando diccionario.....${reset}\n"
     cd dictionary
     sudo rm -rf defaultWordList.txt
+    sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
     sudo cat /usr/share/set/src/fasttrack/wordlist.txt /usr/share/john/password.lst /usr/share/nmap/nselib/data/passwords.lst /usr/share/wordlists/rockyou.txt /usr/share/sqlmap/data/txt/wordlist.txt /usr/share/dict/wordlist-probable.txt > diccionario_combinado.txt
     wc -l diccionario_combinado.txt
     wc -l < diccionario_combinado.txt | cut -d' ' -f1
@@ -332,6 +340,8 @@ fun_install_tools () {
     do
         check_and_install_tool $tool
     done
+
+    echo -e "\n${process} Instalando.....${reset}\n"
 
     cd /opt
     sudo rm -rf Wifi-Hack
