@@ -128,7 +128,7 @@ fun_driver () {
     #--- sudo apt install -y realtek-rtl88x2bu-dkms | off
 
     # Instalar realtek-rtl8188fu-dkms
-    echo -e "\n${info} Instalar realtek-rtl8188fu-dkms......${reset}\n"
+    echo -e "\n${info} Instalando realtek-rtl8188fu-dkms......${reset}\n"
     cd /opt
     sudo rm -rf rtl8188fu
     sudo git clone https://github.com/kelebek333/rtl8188fu
@@ -138,6 +138,19 @@ fun_driver () {
     sudo dkms install rtl8188fu/1.0
     sudo cp ./rtl8188fu/firmware/rtl8188fufw.bin /lib/firmware/rtlwifi/
     cd
+
+    # instalar realtek-rtl8814au-dkms
+    echo -e "\n${info} Instalar realtek-rtl8814au-dkms (opcional)......${reset}\n"
+    echo -e "${green} Por defecto ${white}N ${green}= ${white}No Instalar${reset}"
+    read -p "$(echo -e "${green} Desea instalar realtek-rtl8814au-dkms ahora? [N/y]:${white}") " response
+    if [[ "$response" = @(y|Y) ]]; then
+        # Proceso de instalación
+
+        echo -e "${reset}"
+        sudo apt install -y realtek-rtl8814au-dkms
+    else
+        sleep 1s
+    fi
 }
 
 fun_audio () {
@@ -430,7 +443,7 @@ echo -e "${green}   Update    :  [2024/05/07]${reset}\n"
 # Mostrar información sobre drivers y herramientas
 echo -e "${info} ${blue}Driver rtl8188fu    ${info} ${blue}Forces Audio     ${info} ${blue}Tool Wifite${reset}"
 echo -e "${info} ${blue}Driver rtl8188eus                         ${info} ${blue}Tool Airgeddon${reset}"
-echo -e "                                               ${info} ${blue}Tool Fluxion${reset}"
+echo -e "${info} ${blue}Driver rtl8814au-dkms          ${info} ${blue}Tool Fluxion${reset}"
 echo -e "                                               ${info} ${blue}Tool Sparrow-wifi${reset}"
 echo -e "                                               ${info} ${blue}Tool Feedingbottle${reset}"
 echo -e "                                               ${info} ${blue}Tool lazyaircrack${reset}"
