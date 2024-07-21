@@ -42,7 +42,12 @@ Ejecutar el scrip:
 sudo kalilinuxdrivertools
 ```
 ![logo](https://github.com/JennValentine/Kali-linux_drivers_and_tools_checker/blob/main/Imagenes/kalilinuxdrivertools.jpg)
-:memo: Notas: Características y Funcionalidades Principales
+:memo: Notas: Al ejecutar el script, se solicita la confirmación del usuario para cada paso crítico, 
+como la actualización de repositorios y la instalación de herramientas opcionales. 
+Esto proporciona control al usuario sobre las acciones que se van a realizar en el 
+sistema.
+
+## :star2: Características y Funcionalidades Principales
 
 1 - Comprobación de Permisos de Root:
 
@@ -74,6 +79,8 @@ sudo kalilinuxdrivertools
 
 * Muestra la configuración de red, interfaces inalámbricas, dispositivos USB y capacidades inalámbricas del sistema.
 
+## :hammer_and_wrench: Requisitos 
+-  Sistema Operativo: Kali Linux/Unix
 
 Este script es una herramienta poderosa para cualquier profesional de la seguridad 
 informática que utilice Kali Linux, ya que simplifica y automatiza muchas de las 
