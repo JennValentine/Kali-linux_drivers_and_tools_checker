@@ -105,8 +105,11 @@ fun_paquetes () {
 }
 
 fun_driver () {    
-    # Instalar realtek-rtl8188eus-dkms
-    echo -e "\n${info} Instalando realtek-rtl8188eus-dkms......${reset}"
+    # Instalar driver realtek-rtl*
+    eecho -e "\n${info} Instalando realtek-rtl8188eus-dkms......${reset}"
+    echo -e "${info} Instalando realtek-rtl8723cs-dkms......${reset}"
+    echo -e "${info} Instalando realtek-rtl8814au-dkms......${reset}"
+    echo -e "${info} Instalando realtek-rtl88xxau-dkms......${reset}"
 
     # Lista de herramientas esenciales a comprobar
     essential_tools=("git")
@@ -122,11 +125,13 @@ fun_driver () {
 
     sudo apt-get install -y build-essential dkms linux-headers-$(uname -r)
     sudo apt install -y realtek-rtl8188eus-dkms
-    #--- sudo apt install -y realtek-rtl8814au-dkms
+    sudo apt install -y realtek-rtl8814au-dkms
+    sudo apt install -y realtek-rtl8723cs-dkms
+    sudo apt install -y realtek-rtl88xxau-dkms
     #--- sudo apt install -y realtek-rtl8192eu-dkms | off
     #--- sudo apt install -y realtek-rtl88XXa-dkms | off
     #--- sudo apt install -y realtek-rtl88x2bu-dkms | off
-
+    
     # Instalar realtek-rtl8188fu-dkms
     echo -e "\n${info} Instalando realtek-rtl8188fu-dkms......${reset}\n"
     cd /opt
@@ -138,19 +143,6 @@ fun_driver () {
     sudo dkms install rtl8188fu/1.0
     sudo cp ./rtl8188fu/firmware/rtl8188fufw.bin /lib/firmware/rtlwifi/
     cd
-
-    # instalar realtek-rtl8814au-dkms
-    echo -e "\n${info} Instalar realtek-rtl8814au-dkms (opcional)......${reset}\n"
-    echo -e "${green} Por defecto ${white}N ${green}= ${white}No Instalar${reset}"
-    read -p "$(echo -e "${green} Desea instalar realtek-rtl8814au-dkms ahora? [N/y]:${white}") " response
-    if [[ "$response" = @(y|Y) ]]; then
-        # Proceso de instalación
-
-        echo -e "${reset}"
-        sudo apt install -y realtek-rtl8814au-dkms
-    else
-        sleep 1s
-    fi
 }
 
 fun_audio () {
@@ -312,6 +304,8 @@ fun_install_tools () {
     sudo cp -r /opt/Kali-linux_drivers_and_tools_checker/Herramientas/Handshaker/ /opt/
     sudo chmod +x Handshaker/*
     cd Handshaker
+    sudo mkdir handshake
+    sudo mkdir redes
     sudo chmod +x handshaker.sh
     cd
     echo "cd /opt/Handshaker && sudo ./handshaker.sh" > handshaker
@@ -461,11 +455,11 @@ echo -e "${green}   Version   :  v0.0.01-dev"
 echo -e "${green}   Update    :  [2024/05/07]${reset}\n"
 
 # Mostrar información sobre drivers y herramientas
-echo -e "${info} ${blue}Driver rtl8188fu          ${info} ${blue}Forces Audio     ${info} ${blue}Tool Wifite${reset}"
-echo -e "${info} ${blue}Driver rtl8188eus                               ${info} ${blue}Tool Airgeddon${reset}"
-echo -e "${info} ${blue}Driver rtl8814au-dkms                           ${info} ${blue}Tool Fluxion${reset}"
-echo -e "                                                     ${info} ${blue}Tool Sparrow-wifi${reset}"
-echo -e "                                                     ${info} ${blue}Tool Feedingbottle${reset}"
+echo -e "${info} ${blue}Driver rtl8188eus          ${info} ${blue}Forces Audio    ${info} ${blue}Tool Wifite${reset}"
+echo -e "${info} ${blue}Driver rtl8814au                                ${info} ${blue}Tool Airgeddon${reset}"
+echo -e "${info} ${blue}Driver rtl8723cs                                ${info} ${blue}Tool Fluxion${reset}"
+echo -e "${info} ${blue}Driver rtl88xxau                                ${info} ${blue}Tool Sparrow-wifi${reset}"
+echo -e "${info} ${blue}Driver rtl8188fu                                ${info} ${blue}Tool Feedingbottle${reset}"
 echo -e "                                                     ${info} ${blue}Tool Handshaker${reset}"
 echo -e "                                                     ${info} ${blue}Tool lazyaircrack${reset}"
 echo -e "                                                     ${info} ${blue}Tool Wifi-Hack${reset}"
@@ -475,6 +469,10 @@ echo -e "                                                     ${info} ${blue}Che
 echo -e "                                                     ${info} ${blue}Check eaphammer${reset}"
 echo -e "                                                     ${info} ${blue}Check wifi-honey${reset}"
 echo -e "                                                     ${info} ${blue}Check routersploit${reset}\n"
+
+
+
+realtek-rtl8188eus-dkms
 
 # Solicitar confirmación para la instalación
 echo -e "${green} Por defecto ${white}N ${green}= ${white}No instalar${reset}"
