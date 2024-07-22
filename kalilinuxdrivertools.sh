@@ -470,10 +470,6 @@ echo -e "                                                     ${info} ${blue}Che
 echo -e "                                                     ${info} ${blue}Check wifi-honey${reset}"
 echo -e "                                                     ${info} ${blue}Check routersploit${reset}\n"
 
-
-
-realtek-rtl8188eus-dkms
-
 # Solicitar confirmación para la instalación
 echo -e "${green} Por defecto ${white}N ${green}= ${white}No instalar${reset}"
 read -p "$(echo -e "${green} Desea instalar los drivers y herramientas? [N/y]:${white}") " response
