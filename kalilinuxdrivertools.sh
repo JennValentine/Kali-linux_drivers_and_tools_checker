@@ -289,6 +289,7 @@ fun_install_tools () {
     sudo git clone https://github.com/ChunshengZhao/feedingbottle.git
     sudo chmod +x feedingbottle/*
     cd feedingbottle 
+    sudo rm -rf feedingbottle
     #--- sudo apt-get install -y fluid
     sudo fluid -c feedingbottle.fl
     sudo fltk-config --compile feedingbottle.cxx
@@ -301,8 +302,25 @@ fun_install_tools () {
     sudo mv feedingbottle /usr/local/bin/feedingbottle
     cd
     
+    # Instalar Handshaker
+    echo -e "\n${info} Instalando Handshaker.....${reset}"
+
+    echo -e "\n${process} Instalando.....${reset}\n"
+
+    cd /opt
+    sudo rm -rf Handshaker
+    sudo cp -r /opt/Kali-linux_drivers_and_tools_checker/Herramientas/Handshaker/ /opt/
+    sudo chmod +x Handshaker/*
+    cd Handshaker
+    sudo chmod +x handshaker.sh
+    cd
+    echo "cd /opt/Handshaker && sudo ./handshaker.sh" > handshaker
+    sudo chmod +x handshaker
+    sudo mv handshaker /usr/local/bin/handshaker
+    cd
+
     # Instalar lazyaircrack
-    echo -e "\n${info} Instalando lazyaircrack.....${reset}"
+    echo -e "${info} Instalando lazyaircrack.....${reset}"
 
     # Lista de herramientas esenciales a comprobar
     essential_tools=("git")
@@ -339,6 +357,8 @@ fun_install_tools () {
     wc -l diccionario_sin_duplicados.txt
     # palabras de 8 o mas
     grep -E '\b\w{8,}\b' diccionario_sin_duplicados.txt > palabras_8_o_mas.txt
+    # Total de palabras
+    wc -l palabras_8_o_mas.txt defaultWordList.txt
     sudo mv palabras_8_o_mas.txt defaultWordList.txt
     cd
     echo "cd /opt/lazyaircrack && sudo ./lazyaircrack.sh" > lazyaircrack
@@ -368,13 +388,13 @@ fun_install_tools () {
     cd Wifi-Hack
     sudo chmod +x wifi-hack.py
     cd
-    echo "cd /opt/Wifi-Hack && python3 wifi-hack.py" > wifi-hack
+    echo "cd /opt/Wifi-Hack && sudo python3 wifi-hack.py" > wifi-hack
     sudo chmod +x wifi-hack
     sudo mv wifi-hack /usr/local/bin/wifi-hack
     cd
 
     # Lista de herramientas esenciales a comprobar
-    essential_tools=("aircrack-ng" "bully" "wifite" "mdk3")
+    essential_tools=("xterm" "aircrack-ng" "bully" "wifite" "mdk3")
 
     # Comprobar herramientas esenciales
     echo -e "\n${info} Herramientas esenciales: ${magenta}comprobando...${reset}\n"
@@ -384,7 +404,7 @@ fun_install_tools () {
     done
 
     # Lista de herramientas extras a comprobar
-    extras_tools=("wifite" "kismet" "fern-wifi-cracker" "wireshark" "eaphammer" "wifi-honey" "routersploit")
+    extras_tools=("wifite" "fern-wifi-cracker" "wireshark" "kismet" "eaphammer" "wifi-honey" "routersploit")
 
     # Comprobar herramientas extras
     echo -e "\n${info} Herramientas extras: ${magenta}comprobando...${reset}\n"
@@ -446,8 +466,15 @@ echo -e "${info} ${blue}Driver rtl8188eus                               ${info} 
 echo -e "${info} ${blue}Driver rtl8814au-dkms                           ${info} ${blue}Tool Fluxion${reset}"
 echo -e "                                                     ${info} ${blue}Tool Sparrow-wifi${reset}"
 echo -e "                                                     ${info} ${blue}Tool Feedingbottle${reset}"
+echo -e "                                                     ${info} ${blue}Tool Handshaker${reset}"
 echo -e "                                                     ${info} ${blue}Tool lazyaircrack${reset}"
-echo -e "                                                     ${info} ${blue}Tool Wifi-Hack${reset}\n"
+echo -e "                                                     ${info} ${blue}Tool Wifi-Hack${reset}"
+echo -e "                                                     ${info} ${blue}Check fern-wifi-cracker${reset}"
+echo -e "                                                     ${info} ${blue}Check wireshark${reset}"
+echo -e "                                                     ${info} ${blue}Check kismet${reset}"
+echo -e "                                                     ${info} ${blue}Check eaphammer${reset}"
+echo -e "                                                     ${info} ${blue}Check wifi-honey${reset}"
+echo -e "                                                     ${info} ${blue}Check routersploit${reset}\n"
 
 # Solicitar confirmación para la instalación
 echo -e "${green} Por defecto ${white}N ${green}= ${white}No instalar${reset}"
